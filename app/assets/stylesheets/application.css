@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+  .user-profile {
+      background-color: #3979c3;
+      height: 100vh;
+  }
