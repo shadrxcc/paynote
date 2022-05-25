@@ -1,3 +1,5 @@
+<%= render 'home/nav'%>
+<div class="pt-5 mt-5 ps-3">
 <p style="color: green"><%= notice %></p>
 
 <%= render @group %>
@@ -7,4 +9,5 @@
   <%= link_to "Back to groups", groups_path %>
 
   <%= button_to "Destroy this group", @group, method: :delete %>
+</div>
 </div>

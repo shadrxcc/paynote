@@ -27,3 +27,8 @@
     overflow-x: hidden;
     margin: 0;
   }
+
+  .group-number {
+      position: relative;
+      top: 70px;
+  }

@@ -1,18 +1,24 @@
 <%= render 'home/nav'%>
-<div class>
 
-</div>
 <p style="color: green"><%= notice %></p>
+<div class="group-number mb-5 d-flex px-3 bg-white justify-content-between">
+  <p>Number of payments</p>
+  <p>4</p>
+</div>
 
-<h1>Groups</h1>
+<div class="bg-light">
+<h1 class="mt-5 pt-3 ps-3">Groups</h1>
 
 <div id="groups">
+<div class="">
   <% @groups.each do |group| %>
     <%= render group %>
     <p>
-      <%= link_to "Show this group", group %>
+      <%= button_to "Destroy this group", @group, method: :delete %>
     </p>
   <% end %>
 </div>
+</div>
 
-<%= link_to "New group", new_group_path %>
+<%= link_to "New group", new_group_path, class:"btn ms-3 text-center btn-danger"%>
+</div>
