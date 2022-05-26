@@ -1,5 +1,7 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   # GET /groups or /groups.json
   def index
@@ -12,7 +14,7 @@ class GroupsController < ApplicationController
 
   # GET /groups/new
   def new
-    @group = Group.new
+    @group = current_user.groups.build
   end
 
   # GET /groups/1/edit
@@ -21,17 +23,13 @@ class GroupsController < ApplicationController
 
   # POST /groups or /groups.json
   def create
-    @group = Group.new(group_params)
-
-    respond_to do |format|
+    @group = current_user.groups.new(group_params)
       if @group.save
-        format.html { redirect_to group_url(@group), notice: "Group was successfully created." }
-        format.json { render :show, status: :created, location: @group }
+        redirect_to groups_path
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @group.errors, status: :unprocessable_entity }
       end
-    end
   end
 
   # PATCH/PUT /groups/1 or /groups/1.json
@@ -57,6 +55,11 @@ class GroupsController < ApplicationController
     end
   end
 
+  def correct_user
+    @group = current_user.groups.find_by(id: params[:id])
+    redirect_to groups_path, notice: "Not Authorized to edit this group" if @group.nil?
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group
@@ -65,6 +68,6 @@ class GroupsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def group_params
-      params.require(:group).permit(:name, :icon)
+      params.require(:group).permit(:name, :icon, :user_id)
     end
 end
