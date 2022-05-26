@@ -26,9 +26,14 @@
     box-sizing: border-box;
     overflow-x: hidden;
     margin: 0;
+    font-family: 'Montserrat', sans-serif;
   }
 
   .group-number {
       position: relative;
       top: 70px;
+  }
+
+  .green {
+      background-color: #5fb523;
   }
