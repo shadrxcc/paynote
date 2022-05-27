@@ -1,26 +1,30 @@
 <%= render 'home/nav'%>
 
 <p style="color: green"><%= notice %></p>
-<div class="group-number mb- d-flex px-3 bg-white justify-content-between">
+
+
+<div id="groups">
+<div class="">
+  <% @groups.each do |group| %>
+  <% if group.user == current_user %>
+  <div class="group-number mb- d-flex px-3 bg-white justify-content-between">
   <p>Number of payments</p>
   <p><%= @groups.count %></p>
 </div>
 
 <div class="bg-light">
 <h1 class="mt-5 pt-3 ps-3">Groups</h1>
-
-<div id="groups">
-<div class="">
-  <% @groups.each do |group| %>
    <div class="card mb-3">
   
       <div class="card-body  row align-items-center">
         <div class="d-flex col-9 ">
-          <img src="https://via.placeholder.com/100" alt="icon" class="border border-1 item-icon "> 
+        <div>
+                <img src="<%= group.icon %>" alt="icon" class="image border border-1 item-icon img-thumbnail">
+              </div> 
           <p class="px-3 p-md-3 align-self-center">
         
          <div class="d-flex flex-column">
-           <p><%= group.name %></p>
+           <p><%= link_to group.name, group_path(group.id) %></p>
            <p class="d-block"><%= group.created_at.strftime("%d %b %Y") %> </p>
            </p>
           </div>
@@ -28,12 +32,12 @@
 
         <div class="col-3 text-end">
           <p>
-      <%= button_to "Destroy this group", @group, method: :delete %>
+      <%= button_to "Destroy this group", @group, method: :delete, class: "bg-primary border-0 text-white p-2 rounded" %>
     </p>
         </div>
       </div>
     </div>
-
+  <% end %>
   <% end %>
 </div>
 </div>
