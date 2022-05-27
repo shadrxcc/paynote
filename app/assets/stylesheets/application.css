@@ -18,6 +18,10 @@
       height: 100vh;
   }
 
+  .submit-btn {
+    background-color: #3979c3;
+  }
+
    header {
     background-color: #3979c3;
   }
